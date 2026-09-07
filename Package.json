@@ -1,0 +1,12 @@
+{
+  "name": "pesa",
+  "version": "1.0.0",
+  "description": "Pesa task earning platform",
+  "main": "Server.js",
+  "scripts": {
+    "start": "node Server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
