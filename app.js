@@ -1,4 +1,4 @@
-   async function api(url, opt = {}) {
+async function api(url, opt = {}) {
   const r = await fetch(url, {
     headers: { "Content-Type": "application/json" },
     ...opt
@@ -25,9 +25,13 @@ function formHandler(id, url, redirect) {
   form.onsubmit = async (e) => {
     e.preventDefault();
 
-    msg.textContent = "Creating account...";
+    if (msg) {
+      msg.textContent = "Creating account...";
+    }
 
-    const data = Object.fromEntries(new FormData(form).entries());
+    const data = Object.fromEntries(
+      new FormData(form).entries()
+    );
 
     try {
       await api(url, {
@@ -35,11 +39,15 @@ function formHandler(id, url, redirect) {
         body: JSON.stringify(data)
       });
 
-      msg.textContent = "Account created successfully!";
+      if (msg) {
+        msg.textContent = "Account created successfully!";
+      }
 
       window.location.href = redirect;
     } catch (err) {
-      msg.textContent = err.message;
+      if (msg) {
+        msg.textContent = err.message;
+      }
     }
   };
-}     
+}
