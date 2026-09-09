@@ -71,7 +71,9 @@ app.use(cookieSession({
   secure:process.env.NODE_ENV==="production",
   maxAge:1000*60*60*24*7
 }));
-app.use(express.static(path.join(__dirname,"public")));
+app.use(express.static(path.join(__dirname,"public")));app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 
 function user(req){ return req.session?.user || null; }
 function requireLogin(req,res,next){ if(!user(req)) return res.redirect("/login.html"); next(); }
